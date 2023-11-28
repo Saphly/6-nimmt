@@ -72,10 +72,6 @@ public class Session {
         this.name = name;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
     @Override
     public String toString() {
         return "Session{" +
