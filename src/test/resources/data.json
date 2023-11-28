@@ -1,0 +1,41 @@
+[
+  {
+    "_id": "6565cca6c264445fe0048e79",
+    "name": "Test2",
+    "minPlayers": 2,
+    "maxPlayers": 10,
+    "players": [
+      "user123"
+    ],
+    "status": "OPEN"
+  },
+  {
+    "_id": "6564861632dab1025c9ace72",
+    "name": "ClosedRoom",
+    "minPlayers": 2,
+    "maxPlayers": 10,
+    "players": [
+      "user123"
+    ],
+    "status": "CLOSED"
+  },
+  {
+    "_id": "65661185372ca0018a3ee0ff",
+    "name": "MaxPlayers",
+    "minPlayers": 2,
+    "maxPlayers": 10,
+    "players": [
+      "qwe",
+      "rty",
+      "uio",
+      "asd",
+      "fgh",
+      "sdf",
+      "dfg",
+      "erg",
+      "tyh",
+      "qef"
+    ],
+    "status": "OPEN"
+  }
+]

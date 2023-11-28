@@ -11,8 +11,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Document("sessions")
-@JsonIgnoreProperties(value={"players", "status"}, allowGetters = true)
+
 public class Session {
+    @JsonIgnoreProperties(value={"players", "status"}, allowGetters = true)
 
     public enum Status {
         OPEN,
@@ -65,5 +66,25 @@ public class Session {
 
     public Status getStatus() {
         return status;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Session{" +
+                "_id='" + _id + '\'' +
+                ", name='" + name + '\'' +
+                ", minPlayers=" + minPlayers +
+                ", maxPlayers=" + maxPlayers +
+                ", players=" + players +
+                ", status=" + status +
+                '}';
     }
 }

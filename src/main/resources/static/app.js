@@ -7,14 +7,14 @@ stompClient.onConnect = (frame) => {
     console.log(frame);
     console.log(stompClient);
     stompClient.subscribe(
-        '/topic/session/6564861632dab1025c9ace72',
+        '/topic/session/65661185372ca0018a3ee0ff',
         (response) => { console.log(response) },
-        { id: "6564861632dab1025c9ace72" }
+        { id: "65661185372ca0018a3ee0ff" }
     );
     const playerId = $("#name").val();
     stompClient.subscribe(`/user/${playerId}/error`, (response) => {
         console.error(response)
-        stompClient.unsubscribe("6564861632dab1025c9ace72")
+        stompClient.unsubscribe("65661185372ca0018a3ee0ff")
     });
 }
 
@@ -45,7 +45,7 @@ function connect() {
 }
 
 function disconnect() {
-    stompClient.unsubscribe("6564861632dab1025c9ace72")
+    stompClient.unsubscribe("65661185372ca0018a3ee0ff")
     stompClient.deactivate();
     setConnected(false);
     console.log("Disconnected");
@@ -53,7 +53,7 @@ function disconnect() {
 
 function joinRoom() {
     stompClient.publish({
-        destination: "/app/session/6564861632dab1025c9ace72",
+        destination: "/app/session/65661185372ca0018a3ee0ff",
         body: JSON.stringify({'action': 'JOIN'})
     });
 }

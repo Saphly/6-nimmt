@@ -22,4 +22,20 @@ public class SessionResponse {
         this.type = type;
         this.message = message;
     }
+
+    public Type getType() {
+        return type;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    @Override
+    public String toString() {
+        return "SessionResponse{" +
+                "type=" + type +
+                ", message='" + message + '\'' +
+                '}';
+    }
 }
