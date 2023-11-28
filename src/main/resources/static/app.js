@@ -1,14 +1,22 @@
 const stompClient = new StompJs.Client({
-    brokerURL: 'ws://localhost:8080/gs-guide-websocket'
+    brokerURL: 'ws://localhost:4000/ws'
 });
 
 stompClient.onConnect = (frame) => {
     setConnected(true);
-    console.log('Connected: ' + frame);
-    stompClient.subscribe('/topic/greetings', (greeting) => {
-        showGreeting(JSON.parse(greeting.body).content);
+    console.log(frame);
+    console.log(stompClient);
+    stompClient.subscribe(
+        '/topic/session/6564861632dab1025c9ace72',
+        (response) => { console.log(response) },
+        { id: "6564861632dab1025c9ace72" }
+    );
+    const playerId = $("#name").val();
+    stompClient.subscribe(`/user/${playerId}/error`, (response) => {
+        console.error(response)
+        stompClient.unsubscribe("6564861632dab1025c9ace72")
     });
-};
+}
 
 stompClient.onWebSocketError = (error) => {
     console.error('Error with websocket', error);
@@ -32,19 +40,21 @@ function setConnected(connected) {
 }
 
 function connect() {
+    stompClient.configure({ connectHeaders: { "playerId": $("#name").val() }})
     stompClient.activate();
 }
 
 function disconnect() {
+    stompClient.unsubscribe("6564861632dab1025c9ace72")
     stompClient.deactivate();
     setConnected(false);
     console.log("Disconnected");
 }
 
-function sendName() {
+function joinRoom() {
     stompClient.publish({
-        destination: "/app/hello",
-        body: JSON.stringify({'name': $("#name").val()})
+        destination: "/app/session/6564861632dab1025c9ace72",
+        body: JSON.stringify({'action': 'JOIN'})
     });
 }
 
@@ -56,5 +66,5 @@ $(function () {
     $("form").on('submit', (e) => e.preventDefault());
     $( "#connect" ).click(() => connect());
     $( "#disconnect" ).click(() => disconnect());
-    $( "#send" ).click(() => sendName());
+    $( "#joinRoom" ).click(() => joinRoom());
 });

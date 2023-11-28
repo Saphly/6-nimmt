@@ -1,12 +1,13 @@
-package com.nimmt.server.controllers;
+package com.nimmt.server.controller;
 
-import com.nimmt.server.models.Session;
-import com.nimmt.server.services.SessionService;
+import com.nimmt.server.model.Session;
+import com.nimmt.server.service.SessionService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class SessionController {
 
     @GetMapping(value = "/sessions/{sessionId}")
     public Session getSessionById(@PathVariable String sessionId) {
-        return sessionService.getSessionById(sessionId);
+        return sessionService.getSessionById(sessionId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cannot find session"));
     }
 
     @PostMapping(value = "/sessions")

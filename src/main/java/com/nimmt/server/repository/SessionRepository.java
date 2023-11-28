@@ -1,6 +1,6 @@
-package com.nimmt.server.repositories;
+package com.nimmt.server.repository;
 
-import com.nimmt.server.models.Session;
+import com.nimmt.server.model.Session;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
